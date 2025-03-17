@@ -7,7 +7,10 @@ const dbConfigLocal = {
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_NAME,
 	multipleStatements: false,
-	namedPlaceholders: true
+	namedPlaceholders: true,
+	ssl: {
+		rejectUnauthorized: false 
+	  }
 };
 
 var database = mysql.createPool(dbConfigLocal);
