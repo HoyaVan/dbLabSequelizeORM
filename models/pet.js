@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const databaseConnectionString = include('/databaseConnectionSequelize');
 const sequelize = new Sequelize(databaseConnectionString);
+
 const userModel = include('models/web_user');
 
 const petModel = sequelize.define('pet', {
@@ -24,7 +25,9 @@ const petModel = sequelize.define('pet', {
   }
 }, {
   tableName: 'pet',
-  timestamps: false
+  timestamps: false,
+  singular: 'pet',
+  plural: 'pet'
 });
 
 petModel.belongsTo(userModel , { as: 'owner', timestamps: false, foreignKey:

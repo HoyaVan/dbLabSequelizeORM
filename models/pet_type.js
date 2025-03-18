@@ -16,7 +16,9 @@ const petTypeModel = sequelize.define('pet_type', {
   }
 }, {
   tableName: 'pet_type',
-  timestamps: false
+  timestamps: false,
+  singular: 'pet_type',
+  plural: 'pet_type'
 });
 
 petTypeModel.associate = (models) => {
