@@ -11,7 +11,8 @@
 		"express": "^4.21.2",
 		"mysql2": "^3.13.0",
 		"nodemon": "^3.1.9",
-		"promise": "^8.3.0"
+		"promise": "^8.3.0",
+		"sequelize": "^6.37.6"
 	},
 	"author": "Patrick",
 	"license": "ISC"
