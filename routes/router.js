@@ -1,6 +1,6 @@
 const router = require('express').Router();
 // const database = include('databaseConnection');
-// const dbModel = include('databaseAccessLayer');
+const dbModel = include('databaseAccessLayer');
 //const dbModel = include('staticData');
 const userModel = include('models/web_user');
 const bcrypt = require('bcrypt');
@@ -69,6 +69,15 @@ router.post('/addUser', async (req, res) => {
 	}
 });
 
+router.get('/pets', async (req, res) => {
+	try {
+		const pets = await dbModel.getAllPets();
+		res.render('pets', { pets });
+	} catch (err) {
+		console.log("Error loading pets:", err);
+		res.status(500).send("Error loading pets.");
+	}
+});
 
 // router.get('/', async (req, res) => {
 // 	console.log("page hit");

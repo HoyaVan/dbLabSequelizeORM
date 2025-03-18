@@ -19,6 +19,24 @@ async function getAllUsers() {
 	}
 }
 
+async function getAllPets() {
+	let sqlQuery = `
+		SELECT pet_id, name
+		FROM pet;
+	`;
+
+	try {
+		const results = await database.query(sqlQuery);
+		console.log(results[0]);
+		return results[0];
+	} catch (err) {
+		console.log("Error selecting from pet table");
+		console.log(err);
+		return null;
+	}
+}
+
+
 async function addUser(postData) {
     let sqlInsert = `
 		INSERT INTO web_user (first_name, last_name, email, password_hash) 
@@ -67,4 +85,4 @@ async function deleteUser(webUserId) {
 
 
 
-module.exports = {getAllUsers, addUser, deleteUser}
+module.exports = {getAllUsers, getAllPets, addUser, deleteUser}
