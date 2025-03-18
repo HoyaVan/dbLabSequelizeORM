@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const databaseConnectionString = include('/databaseConnectionSequelize');
 const sequelize = new Sequelize(databaseConnectionString);
+const userModel = include('models/web_user');
 
 const petModel = sequelize.define('pet', {
   pet_id: {
@@ -26,10 +27,9 @@ const petModel = sequelize.define('pet', {
   timestamps: false
 });
 
-// Define associations (optional and should be placed where models are initialized)
-petModel.associate = (models) => {
-    petModel.belongsTo(models.web_user, { foreignKey: 'web_user_id' });
-    petModel.belongsTo(models.pet_type, { foreignKey: 'pet_type_id' });
-};
+petModel.belongsTo(userModel , { as: 'owner', timestamps: false, foreignKey:
+    'web_user_id'});
+    userModel.hasMany(petModel , { as: 'pets', timestamps: false, foreignKey:
+    'web_user_id'});
 
 module.exports = petModel;
