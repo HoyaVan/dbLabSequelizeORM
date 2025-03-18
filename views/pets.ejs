@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8"/>
   <link rel="stylesheet" href="bulma.min.css">
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
   <section class="section">
@@ -20,11 +19,11 @@
                 </tr>
               </thead>
               <tbody>
-                <% pets.forEach(function(pet) { %>
+                <% pets.forEach(pet => { %>
                   <tr>
                     <td><%= pet.name %></td>
                   </tr>
-                <% }) %>
+                <% }); %>
               </tbody>
               <tfoot>
                 <tr>
@@ -36,7 +35,6 @@
         <% } else { %>
           <p>No pets found.</p>
         <% } %>
-
       </div>
     </div>
   </section>

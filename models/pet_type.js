@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const databaseConnectionString = include('/databaseConnectionSequelize');
 const sequelize = new Sequelize(databaseConnectionString);
 
-const PetType = sequelize.define('pet_type', {
+const petTypeModel = sequelize.define('pet_type', {
   pet_type_id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -19,8 +19,8 @@ const PetType = sequelize.define('pet_type', {
   timestamps: false
 });
 
-PetType.associate = (models) => {
-  PetType.hasMany(models.pet, { foreignKey: 'pet_type_id' });
+petTypeModel.associate = (models) => {
+    petTypeModel.hasMany(models.pet, { foreignKey: 'pet_type_id' });
 };
 
-module.exports = PetType;
+module.exports = petTypeModel;

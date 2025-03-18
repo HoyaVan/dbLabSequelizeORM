@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const databaseConnectionString = include('/databaseConnectionSequelize');
 const sequelize = new Sequelize(databaseConnectionString);
 
-const Pet = sequelize.define('pet', {
+const petModel = sequelize.define('pet', {
   pet_id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -27,9 +27,9 @@ const Pet = sequelize.define('pet', {
 });
 
 // Define associations (optional and should be placed where models are initialized)
-Pet.associate = (models) => {
-  Pet.belongsTo(models.web_user, { foreignKey: 'web_user_id' });
-  Pet.belongsTo(models.pet_type, { foreignKey: 'pet_type_id' });
+petModel.associate = (models) => {
+    petModel.belongsTo(models.web_user, { foreignKey: 'web_user_id' });
+    petModel.belongsTo(models.pet_type, { foreignKey: 'pet_type_id' });
 };
 
-module.exports = Pet;
+module.exports = petModel;
