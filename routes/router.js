@@ -4,6 +4,7 @@ const dbModel = include('databaseAccessLayer');
 //const dbModel = include('staticData');
 const userModel = include('models/web_user');
 const bcrypt = require('bcrypt');
+const petModel = require('../models/pet');
 
 router.get('/', async (req, res) => {
 	console.log("page hit");
@@ -71,11 +72,31 @@ router.post('/addUser', async (req, res) => {
 
 router.get('/pets', async (req, res) => {
 	try {
-		const pets = await dbModel.getAllPets();
+		const pets = await petModel.findAll.getAllPets();
 		res.render('pets', { pets });
 	} catch (err) {
 		console.log("Error loading pets:", err);
 		res.status(500).send("Error loading pets.");
+	}
+});
+
+router.get('/pets', async (req, res) => {
+	console.log("page hit");
+	try {
+		const pets = await userModel.findAll({ attributes: ['pet_id', 'pet_name'] });
+		if (pets === null) {
+			res.render('error', { message: 'Error connecting toMySQL' });
+			console.log("Error connecting to userModel");
+		}
+		else {
+			console.log(pets);
+			res.render('index', { pets : pets });
+		}
+	}
+	catch (ex) {
+		res.render('error', { message: 'Error connecting to MySQL' });
+		console.log("Error connecting to MySQL");
+		console.log(ex);
 	}
 });
 
