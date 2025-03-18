@@ -83,7 +83,7 @@ router.get('/pets', async (req, res) => {
 router.get('/pets', async (req, res) => {
 	console.log("page hit");
 	try {
-		const pets = await userModel.findAll({ attributes: ['pet_id', 'pet_name'] });
+		const pets = await userModel.findAll({ attributes: ['pet_id', 'name'] });
 		if (pets === null) {
 			res.render('error', { message: 'Error connecting toMySQL' });
 			console.log("Error connecting to userModel");
