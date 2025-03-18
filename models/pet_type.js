@@ -1,24 +1,26 @@
-const {Sequelize, DataTypes} = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 const databaseConnectionString = include('/databaseConnectionSequelize');
 const sequelize = new Sequelize(databaseConnectionString);
 
-const PetTypeModel = sequelize.define('pet_type', {
-    pet_type_id: {
+const PetType = sequelize.define('pet_type', {
+  pet_type_id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
     allowNull: false
-    },
-    type: {
+  },
+  type: {
     type: DataTypes.STRING(50),
     allowNull: false,
     unique: true
-    }
+  }
 }, {
-    tableName: 'pet',
-    timestamps: false,
-    singular: 'pet',
-    plural: 'pet'
+  tableName: 'pet_type',
+  timestamps: false
 });
-    
-module.exports = PetTypeModel;
+
+PetType.associate = (models) => {
+  PetType.hasMany(models.pet, { foreignKey: 'pet_type_id' });
+};
+
+module.exports = PetType;
